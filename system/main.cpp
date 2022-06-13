@@ -10,7 +10,6 @@
 #include "msg_queue.h"
 #include "ycsb_query.h"
 #include "sim_manager.h"
-#include "sema_manager.h"
 #include "work_queue.h"
 #include "client_query.h"
 #include "crypto.h"
@@ -68,12 +67,6 @@ int main(int argc, char *argv[])
     printf("Initializing transport manager... ");
     fflush(stdout);
     tport_man.init();
-    printf("Done\n");
-    fflush(stdout);
-
-    printf("Initializing semaphore manager... ");
-    fflush(stdout);
-    semamanager.init();
     printf("Done\n");
     fflush(stdout);
 

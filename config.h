@@ -1,9 +1,27 @@
+
+
+
+/*
+without
+g_thread_cnt == g_worker_thread_cnt + g_batching_thread_cnt + g_checkpointing_thread_cnt + g_execution_thread_cnt
+with gbft
+g_thread_cnt == g_worker_thread_cnt + g_batching_thread_cnt + g_checkpointing_thread_cnt + g_execution_thread_cnt + gbft_commit_certificate_thread_cnt
+
+Add bft threads to total thread count
+
+
+g_total_node_cnt= g_node_cnt + g_client_node_cnt
+
+
+g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
+
+*/
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 // Specify the number of servers or replicas
-#define NODE_CNT 4
+#define NODE_CNT 12
 // Number of worker threads at primary. 
-#define THREAD_CNT 5 // This Should be the sum of following thread count + protocol specifig threads
+#define THREAD_CNT 6 // This Should be the sum of following thread count + protocol specifig threads
 #define WORKER_THREAD_CNT 1
 #define BATCH_THREAD_CNT 2
 #define CHECKPOINT_THREAD_CNT 1
@@ -14,16 +32,16 @@
 #define CORE_CNT 8
 #define PART_CNT 1
 // Specify the number of clients.
-#define CLIENT_NODE_CNT 1
+#define CLIENT_NODE_CNT 3
 #define CLIENT_THREAD_CNT 2
 #define CLIENT_REM_THREAD_CNT 1
-#define CLIENT_SEND_THREAD_CNT 1
+#define CLIENT_SEND_THREAD_CNT 2
 #define CLIENT_RUNTIME false
 
 #define MESSAGE_PER_BUFFER 24
 
 // GeoBFT Setting 
-#define GBFT false
+#define GBFT true
 #define GBFT_CLUSTER_SIZE 4
 #define GBFT_CCM_THREAD_CNT 1
 
@@ -198,4 +216,3 @@
 #define BANKING_SMART_CONTRACT false
 
 #endif
-

@@ -1,6 +1,6 @@
 #!/bin/bash
-USERNAME=ubuntu
-home_directory="/home/ubuntu"
+USERNAME=tmane002
+home_directory="/rhome/tmane002/newDB"
 nodes=$1
 ifconfig=$2
 input="./ifconfig.txt"

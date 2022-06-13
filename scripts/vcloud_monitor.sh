@@ -1,7 +1,7 @@
 #!/bin/bash
 # RES_FILE --> Name of the result file.
 #
-USERNAME=ubuntu
+USERNAME=tmane002
 HOSTS="$1"
 IPAddr="$2"
 

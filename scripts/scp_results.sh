@@ -1,6 +1,6 @@
 #!/bin/bash
-USERNAME=ubuntu
-home_directory="/home/ubuntu"
+USERNAME=tmane002
+home_directory="/rhome/tmane002/newDB"
 nodes=$1
 name=$2
 result_dir=$3
@@ -18,8 +18,8 @@ wait
 i=0
 while IFS= read -r line
 do
-	cmd="ssh ${USERNAME}@${line} rm -f ${home_directory}/resilientdb/*;"
-	$($cmd) &
+	# cmd="ssh ${USERNAME}@${line} rm -f ${home_directory}/resilientdb/*;"
+	# $($cmd) &
 	i=$(($i+1))
 done < "$input"
 wait

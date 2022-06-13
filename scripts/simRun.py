@@ -15,8 +15,11 @@ from sys import argv
 from hostnames import *
 import socket
 
+
+
+
 dashboard = None
-home_directory = "/home/ubuntu"
+home_directory = "/rhome/tmane002/newDB"
 PATH = os.getcwd()
 #result_dir = PATH + "/results/"
 result_dir = home_directory+"/resilientdb/results/"

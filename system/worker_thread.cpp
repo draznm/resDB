@@ -624,25 +624,18 @@ RC WorkerThread::run()
 
 #endif
 
-        uint64_t thd_id = get_thd_id();
-        idle_starttime = get_sys_clock();
-
-        if(thd_id>0 && thd_id < g_batching_thread_cnt){
-            // All of the batch threads are controlled by the same semaphore
-            thd_id = g_batching_thread_cnt;
-        }
-            
-        // Wait until there is at least one msg in its corresponding queue
-        semamanager.wait(thd_id);
-
-        INC_STATS(_thd_id, worker_idle_time, get_sys_clock() - idle_starttime);
-
         // Dequeue a message from its work_queue.
         Message *msg = work_queue.dequeue(get_thd_id());
         if (!msg)
         {
-            semamanager.post(thd_id);
+            if (idle_starttime == 0)
+                idle_starttime = get_sys_clock();
             continue;
+        }
+        if (idle_starttime > 0)
+        {
+            INC_STATS(_thd_id, worker_idle_time, get_sys_clock() - idle_starttime);
+            idle_starttime = 0;
         }
 
         // Remove redundant messages.
@@ -704,9 +697,6 @@ RC WorkerThread::run()
 
         INC_STATS(get_thd_id(), worker_release_msg_time, get_sys_clock() - ready_starttime);
     }
-
-    semamanager.post_all();
-
     printf("FINISH: %ld\n", agCount);
     fflush(stdout);
 
