@@ -35,7 +35,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define CLIENT_NODE_CNT 2
 #define CLIENT_THREAD_CNT 2
 #define CLIENT_REM_THREAD_CNT 1
-#define CLIENT_SEND_THREAD_CNT 1
+#define CLIENT_SEND_THREAD_CNT 2
 #define CLIENT_RUNTIME false
 
 #define MESSAGE_PER_BUFFER 24
