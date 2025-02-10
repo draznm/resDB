@@ -35,7 +35,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define CLIENT_NODE_CNT 2
 #define CLIENT_THREAD_CNT 2
 #define CLIENT_REM_THREAD_CNT 1
-#define CLIENT_SEND_THREAD_CNT 2
+#define CLIENT_SEND_THREAD_CNT 1
 #define CLIENT_RUNTIME false
 
 #define MESSAGE_PER_BUFFER 24
@@ -152,7 +152,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define REPLICATED 1
 // To select the amount of time to warmup and run.
 #define DONE_TIMER 1 * 60 * BILLION
-#define WARMUP_TIMER  30 * BILLION
+#define WARMUP_TIMER  5 * BILLION
 // Select the consensus algorithm to run.
 #define CONSENSUS PBFT
 #define PBFT 2
