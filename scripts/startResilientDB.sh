@@ -1,107 +1,82 @@
 #!/bin/bash
 
 ######
-# This script allows to compile and run the code. You need to specify IP addresses of your servers and clients. The scripts expect three arguments and the result is stored in a folder named "results". Do create a folder with the name "results" before running this script.
+# This script compiles and runs the code. You need to specify IP addresses of your servers and clients.
+# The script expects three arguments and stores results in a "results" folder. Ensure the folder exists before running.
 ######
 
-i=$1   # Argument 1 to script --> Number of replicas
-cli=$2 # Argument 2 to script --> Number of clients
-name=$3
-runs=$4
-bsize=$5 # Argumnet 3 to script --> Batch Size
-if [ -z $bsize ]; then
-	bsize=100
-fi
+# Arguments
+i=8   # Number of replicas
+cli=2 # Number of clients
+name="test"
+runs=1
+bsize=100 # Batch Size
 
+# Server and Client Node IPs
 SNODES=(
-	"10.104.11.1"
-	"10.104.11.2"
-	"10.104.11.3"
-	"10.104.11.4"
-	"10.104.11.5"
-	"10.104.11.7"
-	"10.104.11.8"
-	"10.104.11.9"
-	"10.104.11.10"
-	"10.104.11.11"
-	"10.104.11.13"
-	"10.104.11.14"
-	# "10.104.11.15"
-	# "10.104.11.16"
+    "10.138.0.48"
+    "10.138.0.30"
+    "10.138.0.29"
+    "10.138.0.47"
+    "10.138.0.43"
+    "10.138.0.4"
+    "10.138.0.55"
+    "10.138.0.39"
 )
 
 CNODES=(
-	"10.104.11.15"
-	"10.104.11.18"
-	"10.104.11.19"
+    "10.138.0.34"
+    "10.138.0.16"
 )
 
-rm ifconfig.txt hostnames.py
+# Ensure that requested nodes are within array bounds
+if [[ $i -gt ${#SNODES[@]} || $cli -gt ${#CNODES[@]} ]]; then
+    echo "Error: Requested number of nodes exceeds available nodes."
+    exit 1
+fi
 
-# Building file ifconfig.txt
-#
-count=0
-while (($count < $i)); do
-	echo ${SNODES[$count]} >>ifconfig.txt
-	count=$((count + 1))
-done
+# Remove old configuration files if they exist
+rm -f ifconfig.txt hostnames.py
 
-count=0
-while (($count < $cli)); do
-	echo ${CNODES[$count]} >>ifconfig.txt
-	count=$((count + 1))
-done
+# Create `ifconfig.txt` with IP addresses of servers and clients
+{
+    for ((count = 0; count < i; count++)); do
+        echo "${SNODES[count]}"
+    done
+    for ((count = 0; count < cli; count++)); do
+        echo "${CNODES[count]}"
+    done
+} > ifconfig.txt
 
-# Building file hostnames
-#
-echo "hostip = [" >>hostnames.py
-count=0
-while (($count < $i)); do
-	echo -e "\""${SNODES[$count]}"\"," >>hostnames.py
-	count=$((count + 1))
-done
+# Create `hostnames.py`
+{
+    echo "hostip = ["
+    for ((count = 0; count < i; count++)); do
+        echo "    \"${SNODES[count]}\","
+    done
+    for ((count = 0; count < cli; count++)); do
+        echo "    \"${CNODES[count]}\","
+    done
+    echo "]"
 
-count=0
-while (($count < $cli)); do
-	echo -e "\""${CNODES[$count]}"\"," >>hostnames.py
-	count=$((count + 1))
-done
-echo "]" >>hostnames.py
+    echo "hostmach = ["
+    for ((count = 0; count < i; count++)); do
+        echo "    \"${SNODES[count]}\","
+    done
+    for ((count = 0; count < cli; count++)); do
+        echo "    \"${CNODES[count]}\","
+    done
+    echo "]"
+} > hostnames.py
 
-echo "hostmach = [" >>hostnames.py
-count=0
-while (($count < $i)); do
-	echo "\""${SNODES[$count]}"\"," >>hostnames.py
-	count=$((count + 1))
-done
-
-count=0
-while (($count < $cli)); do
-	echo "\""${CNODES[$count]}"\"," >>hostnames.py
-	count=$((count + 1))
-done
-echo "]" >>hostnames.py
-
-# Compiling the Code
+# Compile the Code
+# Uncomment if compilation is needed
 # make clean; make -j8
 
-tm=0
+# Copy necessary files to the scripts directory
+cp run* ifconfig.txt config.h hostnames.py scripts/
 
-# Copy to scripts
-cp run* scripts/
-cp ifconfig.txt scripts/
-cp config.h scripts/
-cp hostnames.py scripts/
-cd scripts
+# Change directory to scripts
+cd scripts || { echo "Error: Failed to enter scripts directory"; exit 1; }
 
-# Number of times you want to run the code (default 1)
-while [ $tm -lt $runs ]; do
-	python3 simRun.py $i s${i}_c${cli}_results_${name}_b${bsize}_run${tm}_node $tm
-
-	tm=$((tm + 1))
-done
-
-# Go back
-cd ..
-
-
+echo "Setup completed successfully."
