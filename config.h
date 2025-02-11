@@ -151,8 +151,8 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define PARTITIONED 0
 #define REPLICATED 1
 // To select the amount of time to warmup and run.
-#define DONE_TIMER 1 * 180 * BILLION
-#define WARMUP_TIMER  60 * BILLION
+#define DONE_TIMER 1 * 240 * BILLION
+#define WARMUP_TIMER  120 * BILLION
 // Select the consensus algorithm to run.
 #define CONSENSUS PBFT
 #define PBFT 2
