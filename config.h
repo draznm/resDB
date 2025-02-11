@@ -32,7 +32,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define CORE_CNT 8
 #define PART_CNT 1
 // Specify the number of clients.
-#define CLIENT_NODE_CNT 24
+#define CLIENT_NODE_CNT 12
 #define CLIENT_THREAD_CNT 2
 #define CLIENT_REM_THREAD_CNT 1
 #define CLIENT_SEND_THREAD_CNT 2
