@@ -42,7 +42,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 
 // GeoBFT Setting 
 #define GBFT true
-#define GBFT_CLUSTER_SIZE 16
+#define GBFT_CLUSTER_SIZE 4
 #define GBFT_CCM_THREAD_CNT 1
 
 #define LOAD_PER_SERVER 1
