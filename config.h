@@ -73,7 +73,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define MEM_SIZE (1UL << 30)
 #define NO_FREE false
 #define TPORT_TYPE TCP
-#define TPORT_PORT 10000
+#define TPORT_PORT 5000
 #define TPORT_WINDOW 20000
 #define SET_AFFINITY false
 #define MAX_TPORT_NAME 128
