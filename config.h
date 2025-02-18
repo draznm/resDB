@@ -63,7 +63,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define TIME_PROF_ENABLE false
 #define FIN_BY_TIME true
 // Number of transactions each client should send without waiting.
-#define MAX_TXN_IN_FLIGHT 2000
+#define MAX_TXN_IN_FLIGHT 5000
 #define SERVER_GENERATE_QUERIES false
 #define MEM_ALLIGN 8
 #define THREAD_ALLOC false
@@ -105,7 +105,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define SEQ_THREAD_CNT 4
 #define MAX_ROW_PER_TXN 64
 #define QUERY_INTVL 1UL
-#define MAX_TXN_PER_PART 100
+#define MAX_TXN_PER_PART 4000
 #define FIRST_PART_LOCAL true
 #define MAX_TUPLE_SIZE 1024
 #define GEN_BY_MPR false
