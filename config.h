@@ -38,7 +38,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define CLIENT_SEND_THREAD_CNT 2
 #define CLIENT_RUNTIME false
 
-#define MESSAGE_PER_BUFFER 24
+#define MESSAGE_PER_BUFFER 12
 
 // GeoBFT Setting 
 #define GBFT true
@@ -63,7 +63,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define TIME_PROF_ENABLE false
 #define FIN_BY_TIME true
 // Number of transactions each client should send without waiting.
-#define MAX_TXN_IN_FLIGHT 5000
+#define MAX_TXN_IN_FLIGHT 3000
 #define SERVER_GENERATE_QUERIES false
 #define MEM_ALLIGN 8
 #define THREAD_ALLOC false
