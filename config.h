@@ -38,7 +38,7 @@ g_total_thread_cnt = g_thread_cnt + g_rem_thread_cnt + g_send_thread_cnt;
 #define CLIENT_SEND_THREAD_CNT 2
 #define CLIENT_RUNTIME false
 
-#define MESSAGE_PER_BUFFER 2
+#define MESSAGE_PER_BUFFER 1
 
 // GeoBFT Setting 
 #define GBFT true
